@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  --bg: #f4f5f7; --card: #fff; --text: #1f2937; --muted: #6b7280; --line: #e5e7eb;
+  --accent: #4f46e5; --accent-fg: #fff;
+  --shadow: 0 1px 3px rgba(16,24,40,.08), 0 4px 14px rgba(16,24,40,.06);
+  --low-bg: #dcfce7; --low-fg: #166534;
+  --med-bg: #fef3c7; --med-fg: #92400e;
+  --high-bg: #fee2e2; --high-fg: #991b1b;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f172a; --card: #1e293b; --text: #f1f5f9; --muted: #94a3b8; --line: #334155;
+    --accent: #818cf8; --accent-fg: #0f172a; --shadow: 0 1px 3px rgba(0,0,0,.4);
+    --low-bg: #14532d; --low-fg: #bbf7d0; --med-bg: #78350f; --med-fg: #fde68a;
+    --high-bg: #7f1d1d; --high-fg: #fecaca;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f172a; --card: #1e293b; --text: #f1f5f9; --muted: #94a3b8; --line: #334155;
+  --accent: #818cf8; --accent-fg: #0f172a; --shadow: 0 1px 3px rgba(0,0,0,.4);
+  --low-bg: #14532d; --low-fg: #bbf7d0; --med-bg: #78350f; --med-fg: #fde68a;
+  --high-bg: #7f1d1d; --high-fg: #fecaca;
+}
+
+html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+body { background: var(--bg); color: var(--text); min-height: 100vh; }
+
+.card { background: var(--card); box-shadow: var(--shadow); border-radius: 16px; }
+.p-low { background: var(--low-bg); color: var(--low-fg); }
+.p-medium { background: var(--med-bg); color: var(--med-fg); }
+.p-high { background: var(--high-bg); color: var(--high-fg); }
+.pill { border: 2px solid transparent; transition: border-color .15s; }
+.pill.on { border-color: currentColor; }
+
+.row { transition: max-height .28s ease, opacity .25s ease, transform .28s ease; overflow: hidden; animation: pop .2s ease; }
+.row.gone { max-height: 0 !important; opacity: 0; transform: translateX(24px); }
+@keyframes pop { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+
+button:focus-visible, input:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { .row, .row.gone { transition: none; animation: none; } }
